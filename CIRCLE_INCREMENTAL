@@ -4,7 +4,7 @@ local TweenService = game:GetService("TweenService")
 local Workspace = game:GetService("Workspace")
 
 
-local speed = 1.5
+local speed = 15
 
 while _G.Collect and task.wait() do
     for _, v in pairs(Workspace.Stuff:GetChildren()) do
