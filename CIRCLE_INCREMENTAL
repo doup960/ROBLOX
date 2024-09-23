@@ -1,24 +1,41 @@
+-- Create the GUI
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+local toggleButton = Instance.new("TextButton")
+
+-- Set up the GUI
+screenGui.Parent = player:WaitForChild("PlayerGui")  -- Add the GUI to the player's screen
+
+toggleButton.Parent = screenGui
+toggleButton.Size = UDim2.new(0, 100, 0, 50)         -- Set button size
+toggleButton.Position = UDim2.new(0, 100, 0, 0)      -- Set button position next to the chat button
+toggleButton.Text = "Teleport: ON"                   -- Default text when teleporting is enabled
+toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)  -- Green for ON state
+
+-- Global teleport control
 _G.Collect = true
 
-local TweenService = game:GetService("TweenService")
-local Workspace = game:GetService("Workspace")
+-- Function to toggle teleporting on and off
+local function toggleTeleport()
+    if _G.Collect then
+        _G.Collect = false
+        toggleButton.Text = "Teleport: OFF"           -- Change button text to indicate OFF state
+        toggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)  -- Red for OFF state
+    else
+        _G.Collect = true
+        toggleButton.Text = "Teleport: ON"            -- Change button text to indicate ON state
+        toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)  -- Green for ON state
+    end
+end
 
-local speed = 15
-local floatOffset = 0.01
+-- Connect the button to the toggle function
+toggleButton.MouseButton1Click:Connect(toggleTeleport)
 
-while _G.Collect and task.wait() do
-    for _, v in pairs(Workspace.Stuff:GetChildren()) do
-        local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
-        local distance = (v.Position - hrp.Position).Magnitude
-        local duration = distance / speed
-        local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-
-        local goalPosition = v.Position + Vector3.new(0, floatOffset, 0)
-        local goalCFrame = CFrame.new(goalPosition)
-        local goal = {CFrame = goalCFrame}
-
-        local tween = TweenService:Create(hrp, tweenInfo, goal)
-        tween:Play()
-        tween.Completed:Wait()
+-- The teleportation loop
+while task.wait() do
+    if _G.Collect then
+        for i, v in pairs(game:GetService("Workspace").Stuff:GetChildren()) do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+        end
     end
 end
