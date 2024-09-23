@@ -3,8 +3,8 @@ _G.Collect = true
 local TweenService = game:GetService("TweenService")
 local Workspace = game:GetService("Workspace")
 
-
 local speed = 15
+local floatOffset = 0.01
 
 while _G.Collect and task.wait() do
     for _, v in pairs(Workspace.Stuff:GetChildren()) do
@@ -12,10 +12,13 @@ while _G.Collect and task.wait() do
         local distance = (v.Position - hrp.Position).Magnitude
         local duration = distance / speed
         local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-        local goal = {CFrame = v.CFrame}
+
+        local goalPosition = v.Position + Vector3.new(0, floatOffset, 0)
+        local goalCFrame = CFrame.new(goalPosition)
+        local goal = {CFrame = goalCFrame}
+
         local tween = TweenService:Create(hrp, tweenInfo, goal)
         tween:Play()
-
         tween.Completed:Wait()
     end
 end
