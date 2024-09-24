@@ -1,7 +1,7 @@
 local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "TPButton"
 local toggleButton = Instance.new("TextButton")
+toggleButton.Name = "TPButton"
 local Rounder = Instance.new("UICorner")
 screenGui.Parent = player:WaitForChild("PlayerGui")
 Rounder.Parent = PlayerGui:WaitForChild("TPButton")
@@ -9,7 +9,7 @@ Rounder.Parent = PlayerGui:WaitForChild("TPButton")
 toggleButton.Parent = screenGui
 toggleButton.Size = UDim2.new(0, 100, 0, 50)        
 toggleButton.Position = UDim2.new(0.171, 0, 0, 0)      
-toggleButton.Text = "OFF"                  
+toggleButton.Text = "OFF" 
 toggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)  
 _G.Collect = false
 
@@ -30,7 +30,7 @@ toggleButton.MouseButton1Click:Connect(toggleTeleport)
 
 -- The teleportation loop
 while task.wait(0.01) do
-    if _G.Collect = true then
+    if _G.Collect == true then
         print("true")
         for i, v in pairs(game:GetService("Workspace").Stuff:GetChildren()) do
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
