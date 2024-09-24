@@ -1,30 +1,27 @@
--- Create the GUI
 local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TPButton"
 local toggleButton = Instance.new("TextButton")
-
--- Set up the GUI
-screenGui.Parent = player:WaitForChild("PlayerGui")  -- Add the GUI to the player's screen
+local Rounder = Instance.new("UICorner")
+screenGui.Parent = player:WaitForChild("PlayerGui")
+Rounder.Parent = PlayerGui:WaitForChild("TPButton")
 
 toggleButton.Parent = screenGui
-toggleButton.Size = UDim2.new(0, 100, 0, 50)         -- Set button size
-toggleButton.Position = UDim2.new(0, 100, 0, 0)      -- Set button position next to the chat button
-toggleButton.Text = "Teleport: ON"                   -- Default text when teleporting is enabled
-toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)  -- Green for ON state
-
--- Global teleport control
+toggleButton.Size = UDim2.new(0, 100, 0, 50)        
+toggleButton.Position = UDim2.new(0, 100, 0, 0)      
+toggleButton.Text = "OFF"                  
+toggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)  
 _G.Collect = false
 
--- Function to toggle teleporting on and off
 local function toggleTeleport()
     if _G.Collect then
         _G.Collect = false
-        toggleButton.Text = "Teleport: OFF"           -- Change button text to indicate OFF state
-        toggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)  -- Red for OFF state
+        toggleButton.Text = "OFF" 
+        toggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
     else
         _G.Collect = true
-        toggleButton.Text = "Teleport: ON"            -- Change button text to indicate ON state
-        toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)  -- Green for ON state
+        toggleButton.Text = "Teleport: ON"       
+        toggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
     end
 end
 
@@ -33,7 +30,8 @@ toggleButton.MouseButton1Click:Connect(toggleTeleport)
 
 -- The teleportation loop
 while task.wait(0.01) do
-    if _G.Collect then
+    if _G.Collect = true then
+        print("true")
         for i, v in pairs(game:GetService("Workspace").Stuff:GetChildren()) do
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
         end
