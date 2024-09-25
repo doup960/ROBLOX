@@ -1,7 +1,7 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Circle Incremental Script Hub (Version 1.0.0)",
+    Name = "Circle Incremental Script Hub (Version 1.0.1)",
     LoadingTitle = ".gg/spJewPjrUZ",
     LoadingSubtitle = "by doup96 (doup96 on discord)",
     ConfigurationSaving = {
@@ -34,19 +34,23 @@ local Window = Rayfield:CreateWindow({
     CurrentValue = false,
     Flag = "CircleCollectToggle",
     Callback = function(Value)
-        for i, v in pairs(game:GetService("Workspace").Stuff:GetChildren()) do
-             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+        while Value == true do
+            for i, v in pairs(game:GetService("Workspace").Stuff:GetChildren()) do
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            end
         end
     end,
  })
 
  local Toggle = CircleTab:CreateToggle({
-    Name = "TP to spheres",
+    Name = "TP to Spheres",
     CurrentValue = false,
     Flag = "SphereCollectToggle",
     Callback = function(Value)
-          for i, v in pairs(game:GetService("Workspace").Spheres:GetChildren()) do
-               game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-         end
+        while Value == true do
+            for i, v in pairs(game:GetService("Workspace").Spherespheres:GetChildren()) do
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+            end
+        end
     end,
  })
