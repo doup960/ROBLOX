@@ -1,58 +1,123 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Doups CISH", HidePremium = false, SaveConfig = false, ConfigFolder = "DSH"})
 
-local Window = Rayfield:CreateWindow({
-    Name = "Circle Incremental Script Hub (Version 1.0.2)",
-    LoadingTitle = ".gg/spJewPjrUZ",
-    LoadingSubtitle = "by doup96 (doup96 on discord)",
-    ConfigurationSaving = {
-       Enabled = true,
-       FolderName = nil,
-       FileName = "Circle Incremental Hub"
-    },
-    Discord = {
-       Enabled = false,
-       Invite = "noinvitelink",
-       RememberJoins = true
-    },
-    KeySystem = false,
-    KeySettings = {
-       Title = "Untitled",
-       Subtitle = "Key System",
-       Note = "No method of obtaining the key is provided",
-       FileName = "Key",
-       SaveKey = true,
-       GrabKeyFromSite = false,
-       Key = {"Hello"}
-    }
- })
+local function notifyWIP()
+    OrionLib:MakeNotification({
+        Name = "Work In Progress!",
+        Content = "Im currently working on adding this feature to the game! If you have what I need to make this please ping me in my discord server! (discord.gg/spJewPjrUZ)",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
 
- local CircleTab = Window:CreateTab("Circle Incremental", 4483362458)
- local Section = CircleTab:CreateSection("Circles")
 
- local Toggle = CircleTab:CreateToggle({
-    Name = "TP to circles",
-    CurrentValue = false,
-    Flag = "CircleCollectToggle",
-    Callback = function(Value)
-        while Value == true do
-            wait(0.01)
-            for i, v in pairs(game:GetService("Workspace").Stuff:GetChildren()) do
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+
+
+local CircleInc = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = CircleInc:AddSection({
+	Name = "Automation"
+})
+
+local player = game.Players.LocalPlayer
+local isToggled = false
+
+CircleInc:AddToggle({
+	Name = "Auto Circles",
+	Default = false,
+	Callback = function(Value)
+		isToggled = Value
+		while isToggled do
+            wait(0.05)
+            local stuff = game:GetService("Workspace").Stuff:GetChildren()
+            
+            if #stuff > 0 and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local randomPart = stuff[math.random(1, #stuff)]
+                player.Character.HumanoidRootPart.CFrame = randomPart.CFrame
             end
         end
-    end,
- })
+	end    
+})
 
- local Toggle = CircleTab:CreateToggle({
-    Name = "TP to Spheres",
-    CurrentValue = false,
-    Flag = "SphereCollectToggle",
-    Callback = function(Value)
-        while Value == true do
-            wait(0.01)
-            for i, v in pairs(game:GetService("Workspace").Spherespheres:GetChildren()) do
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+
+CircleInc:AddToggle({
+	Name = "Auto Clicks",
+	Default = false,
+	Callback = function(Value)
+		isToggled = Value
+		while isToggled do
+         wait(0.75)
+         player.Character.HumanoidRootPart.CFrame = CFrame.new(105, 4, -17)
+         end
+    end
+})
+
+CircleInc:AddToggle({
+	Name = "Auto Spheres",
+	Default = false,
+	Callback = function(Value)
+		isToggled = Value
+		while isToggled do
+            wait(0.05)
+            local spheres = game:GetService("Workspace").Spheres:GetChildren()
+            
+            if #spheres > 0 and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local randomPart = spheres[math.random(1, #spheres)]
+                player.Character.HumanoidRootPart.CFrame = randomPart.CFrame
             end
         end
-    end,
- })
+	end    
+})
+
+local Section = CircleInc:AddSection({
+	Name = "Teleports"
+})
+
+
+local Other = Window:MakeTab({
+	Name = "Misc.",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Other:AddSection({
+	Name = "Teleports"
+})
+
+Other:AddButton({
+	Name = "Circles",
+	Callback = function()
+      		player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 3, 9)
+  	end    
+})
+
+Other:AddButton({
+	Name = "Clicks",
+	Callback = function()
+      		player.Character.HumanoidRootPart.CFrame = CFrame.new(105, 4, -17)
+  	end    
+})
+
+Other:AddButton({
+	Name = "Upgrade Emp.",
+	Callback = function()
+      		player.Character.HumanoidRootPart.CFrame = CFrame.new(29, 3, 97)
+  	end    
+})
+
+local Section = Other:AddSection({
+	Name = "Work In Progress"
+})
+
+Other:AddButton({
+	Name = "Supersede",
+	Callback = function()
+      	notifyWIP()
+  	end    
+})
+
+OrionLib:Init()
