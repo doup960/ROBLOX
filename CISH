@@ -43,25 +43,25 @@ CircleInc:AddToggle({
 	end    
 })
 
-
+local isToggled2 = false
 CircleInc:AddToggle({
 	Name = "Auto Clicks",
 	Default = false,
 	Callback = function(Value)
-		isToggled = Value
-		while isToggled do
+		isToggled2 = Value
+		while isToggled2 do
          wait(0.75)
          player.Character.HumanoidRootPart.CFrame = CFrame.new(105, 4, -17)
          end
     end
 })
-
+local isToggled3 = false
 CircleInc:AddToggle({
 	Name = "Auto Spheres",
 	Default = false,
 	Callback = function(Value)
-		isToggled = Value
-		while isToggled do
+		isToggled3 = Value
+		while isToggled3 do
             wait(0.05)
             local spheres = game:GetService("Workspace").Spheres:GetChildren()
             
