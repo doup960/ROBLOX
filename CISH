@@ -1,10 +1,11 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "Doups CISH", HidePremium = false, SaveConfig = false, ConfigFolder = "DSH"})
 
+
 local function notifyWIP()
     OrionLib:MakeNotification({
         Name = "Work In Progress!",
-        Content = "Im currently working on adding this feature to the game! If you have what I need to make this please ping me in my discord server! (discord.gg/spJewPjrUZ)",
+        Content = "Im currently working on adding this feature to the game! Join my DC if you have what I need! (discord.gg/spJewPjrUZ)",
         Image = "rbxassetid://4483345998",
         Time = 5
     })
@@ -13,6 +14,7 @@ end
 local circlespeed = 0.1
 local clickspeed = 0.5
 local spherespeed = 0.1
+local cashspeed = 0.2
 
 
 local CircleInc = Window:MakeTab({
@@ -45,18 +47,6 @@ CircleInc:AddToggle({
 	end    
 })
 
-CircleInc:AddSlider({
-	Name = "Auto Circle Speed",
-	Min = 0.05,
-	Max = 1,
-	Default = 0.15,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 0.05,
-	ValueName = "Seconds",
-	Callback = function(Value)
-		circlespeed = Value
-	end    
-})
 
 local isToggled2 = false
 CircleInc:AddToggle({
@@ -70,20 +60,6 @@ CircleInc:AddToggle({
          end
     end
 })
-
-CircleInc:AddSlider({
-	Name = "Auto Click Speed",
-	Min = 0.1,
-	Max = 2.5,
-	Default = 0.5,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 0.1,
-	ValueName = "Seconds",
-	Callback = function(Value)
-		clickspeed = Value
-	end    
-})
-
 
 local isToggled3 = false
 CircleInc:AddToggle({
@@ -103,7 +79,58 @@ CircleInc:AddToggle({
 	end    
 })
 
-CircleInc:AddSlider({
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local button = game.Workspace.Conveyor.Button
+local clickDetector = button:FindFirstChild("ClickDetector")
+CircleInc:AddLabel("auto cash kinda buggy btw")
+local isToggled4 = false
+CircleInc:AddToggle({
+	Name = "Auto Cash",
+	Default = false,
+	Callback = function(Value)
+		isToggled4 = Value
+		while isToggled4 do
+            wait(cashspeed)
+			if clickDetector then
+   				fireclickdetector(clickDetector)
+			end
+        end
+	end    
+})
+
+
+local Section = CircleInc:AddSection({
+	Name = "Speed"
+})
+
+local circleslider = CircleInc:AddSlider({
+	Name = "Auto Circle Speed",
+	Min = 0.05,
+	Max = 1,
+	Default = 0.15,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.05,
+	ValueName = "Seconds",
+	Callback = function(Value)
+		circlespeed = Value
+	end
+})
+
+local clickslider = CircleInc:AddSlider({
+	Name = "Auto Click Speed",
+	Min = 0.1,
+	Max = 2.5,
+	Default = 0.5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.1,
+	ValueName = "Seconds",
+	Callback = function(Value)
+		clickspeed = Value
+	end    
+})
+
+local sphereslider = CircleInc:AddSlider({
 	Name = "Auto Sphere Speed",
 	Min = 0.05,
 	Max = 1,
@@ -116,9 +143,47 @@ CircleInc:AddSlider({
 	end    
 })
 
-local Section = CircleInc:AddSection({
-	Name = "Teleports"
+local cashslider = CircleInc:AddSlider({
+	Name = "Auto Cash Speed",
+	Min = 0.1,
+	Max = 1.5,
+	Default = 0.2,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.1,
+	ValueName = "Seconds",
+	Callback = function(Value)
+		cashspeed = Value
+	end
 })
+
+local Section = CircleInc:AddSection({
+	Name = "Reset Speed"
+})
+CircleInc:AddButton({
+	Name = "Reset Circle Speed",
+	Callback = function()
+        circleslider:Set(0.15)
+  	end    
+})
+CircleInc:AddButton({
+	Name = "Reset Click Speed",
+	Callback = function()
+        clickslider:Set(0.5)
+  	end    
+})
+CircleInc:AddButton({
+	Name = "Reset Sphere Speed",
+	Callback = function()
+        sphereslider:Set(0.15)
+  	end    
+})
+CircleInc:AddButton({
+	Name = "Reset Cash Speed",
+	Callback = function()
+        cashslider:Set(0.2)
+  	end    
+})
+
 
 
 local Other = Window:MakeTab({
@@ -155,33 +220,59 @@ Other:AddButton({
 Other:AddButton({
 	Name = "Tires",
 	Callback = function()
-      		player.Character.HumanoidRootPart.CFrame = CFrame.new(-62, 3, 50)
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-62, 3, 50)
   	end    
 })
 
-local Section = Other:AddSection({
-	Name = "Work In Progress"
+Other:AddButton({
+	Name = "Cash1",
+	Callback = function()
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-137, 3, -14)
+  	end    
 })
 
 Other:AddButton({
-	Name = "Cash",
+	Name = "Cash2",
 	Callback = function()
-      	notifyWIP()
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-137, 3, -108)
   	end    
 })
 
 Other:AddButton({
 	Name = "Supersede",
 	Callback = function()
-      	notifyWIP()
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-375, 3, 88)
   	end    
 })
-
 Other:AddButton({
 	Name = "Circle Fighting",
 	Callback = function()
-      	notifyWIP()
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-440, 3, 11)
   	end    
 })
+Other:AddButton({
+	Name = "Boxes",
+	Callback = function()
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-483, 3, -216)
+  	end    
+})
+Other:AddButton({
+	Name = "Lucktrize",
+	Callback = function()
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-375, 3, 88)
+  	end    
+})
+Other:AddButton({
+	Name = "Recircle",
+	Callback = function()
+		player.Character.HumanoidRootPart.CFrame = CFrame.new(-562, 3, -137)
+  	end    
+})
+
+local Section = Other:AddSection({
+	Name = "Work In Progress"
+})
+Other:AddLabel("nothing coz im sigma like that 😎")
+
 
 OrionLib:Init()
