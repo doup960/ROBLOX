@@ -110,7 +110,7 @@ local circleslider = CircleInc:AddSlider({
 	Max = 1,
 	Default = 0.15,
 	Color = Color3.fromRGB(255,255,255),
-	Increment = 0.05,
+	Increment = 0.005,
 	ValueName = "Seconds",
 	Callback = function(Value)
 		circlespeed = Value
@@ -123,7 +123,7 @@ local clickslider = CircleInc:AddSlider({
 	Max = 2.5,
 	Default = 0.5,
 	Color = Color3.fromRGB(255,255,255),
-	Increment = 0.1,
+	Increment = 0.01,
 	ValueName = "Seconds",
 	Callback = function(Value)
 		clickspeed = Value
@@ -136,7 +136,7 @@ local sphereslider = CircleInc:AddSlider({
 	Max = 1,
 	Default = 0.15,
 	Color = Color3.fromRGB(255,255,255),
-	Increment = 0.05,
+	Increment = 0.005,
 	ValueName = "Seconds",
 	Callback = function(Value)
 		spherespeed = Value
@@ -149,7 +149,7 @@ local cashslider = CircleInc:AddSlider({
 	Max = 1.5,
 	Default = 0.2,
 	Color = Color3.fromRGB(255,255,255),
-	Increment = 0.1,
+	Increment = 0.01,
 	ValueName = "Seconds",
 	Callback = function(Value)
 		cashspeed = Value
@@ -272,7 +272,7 @@ Other:AddButton({
 local Section = Other:AddSection({
 	Name = "Work In Progress"
 })
-Other:AddLabel("nothing coz im sigma like that 😎")
+Other:AddLabel("nothing coz im sigma like that 😎 (unless they update)")
 
 
 OrionLib:Init()
