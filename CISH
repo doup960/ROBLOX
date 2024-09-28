@@ -1,6 +1,9 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "Doups CISH", HidePremium = false, SaveConfig = false, ConfigFolder = "DSH"})
 
+local player = game.Players.LocalPlayer
+local chr = player.Character
+local hrp = chr.HumanoidRootPart
 
 local function notifyWIP()
     OrionLib:MakeNotification({
@@ -10,6 +13,7 @@ local function notifyWIP()
         Time = 5
     })
 end
+
 
 local circlespeed = 0.1
 local clickspeed = 0.5
@@ -22,12 +26,11 @@ local CircleInc = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-
+CircleInc:AddLabel("Beta Version V1.3.2")
 local Section = CircleInc:AddSection({
 	Name = "Automation"
 })
 
-local player = game.Players.LocalPlayer
 local isToggled = false
 
 CircleInc:AddToggle({
@@ -41,7 +44,7 @@ CircleInc:AddToggle({
             
             if #stuff > 0 and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
                 local randomPart = stuff[math.random(1, #stuff)]
-                player.Character.HumanoidRootPart.CFrame = randomPart.CFrame
+                hrp.CFrame = randomPart.CFrame
             end
         end
 	end    
@@ -56,7 +59,7 @@ CircleInc:AddToggle({
 		isToggled2 = Value
 		while isToggled2 do
          wait(clickspeed)
-         player.Character.HumanoidRootPart.CFrame = CFrame.new(105, 4, -17)
+         hrp.CFrame = CFrame.new(105, 4, -17)
          end
     end
 })
@@ -73,14 +76,13 @@ CircleInc:AddToggle({
             
             if #spheres > 0 and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
                 local randomPart = spheres[math.random(1, #spheres)]
-                player.Character.HumanoidRootPart.CFrame = randomPart.CFrame
+                hrp.CFrame = randomPart.CFrame
             end
         end
 	end    
 })
 
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
 local button = game.Workspace.Conveyor.Button
 local clickDetector = button:FindFirstChild("ClickDetector")
 CircleInc:AddLabel("auto cash kinda buggy btw")
@@ -199,80 +201,155 @@ local Section = Other:AddSection({
 Other:AddButton({
 	Name = "Circles",
 	Callback = function()
-      		player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 3, 9)
+      		hrp.CFrame = CFrame.new(0, 3, 9)
   	end    
 })
 
 Other:AddButton({
 	Name = "Clicks",
 	Callback = function()
-      		player.Character.HumanoidRootPart.CFrame = CFrame.new(105, 4, -17)
+      		hrp.CFrame = CFrame.new(105, 4, -17)
   	end    
 })
 
 Other:AddButton({
 	Name = "Upgrade Emp.",
 	Callback = function()
-      		player.Character.HumanoidRootPart.CFrame = CFrame.new(29, 3, 97)
+      		hrp.CFrame = CFrame.new(29, 3, 97)
   	end    
 })
 
 Other:AddButton({
 	Name = "Tires",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-62, 3, 50)
+		hrp.CFrame = CFrame.new(-62, 3, 50)
   	end    
 })
 
 Other:AddButton({
 	Name = "Cash1",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-137, 3, -14)
+		hrp.CFrame = CFrame.new(-137, 3, -14)
   	end    
 })
 
 Other:AddButton({
 	Name = "Cash2",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-137, 3, -108)
+		hrp.CFrame = CFrame.new(-137, 3, -108)
   	end    
 })
 
 Other:AddButton({
 	Name = "Supersede",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-375, 3, 88)
+		hrp.CFrame = CFrame.new(-375, 3, 88)
   	end    
 })
 Other:AddButton({
 	Name = "Circle Fighting",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-440, 3, 11)
+		hrp.CFrame = CFrame.new(-440, 3, 11)
   	end    
 })
 Other:AddButton({
 	Name = "Boxes",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-483, 3, -216)
+		hrp.CFrame = CFrame.new(-483, 3, -216)
   	end    
 })
 Other:AddButton({
 	Name = "Lucktrize",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-375, 3, 88)
+		hrp.CFrame = CFrame.new(-375, 3, 88)
   	end    
 })
 Other:AddButton({
 	Name = "Recircle",
 	Callback = function()
-		player.Character.HumanoidRootPart.CFrame = CFrame.new(-562, 3, -137)
-  	end    
+		hrp.CFrame = CFrame.new(-562, 3, -137)
+  	end
 })
 
 local Section = Other:AddSection({
 	Name = "Work In Progress"
 })
-Other:AddLabel("nothing coz im sigma like that 😎 (unless they update)")
+Other:AddButton({
+	Name = "Lucktrize",
+	Callback = function()
+		--hrp.CFrame = CFrame.new(-375, 3, 88)
+        notifyWIP()
+  	end    
+})
+-- Other:AddLabel("nothing coz im sigma like that 😎")
+
+local Credits = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Credits:AddParagraph("Developers","doup96, Graysonfary")
+Credits:AddParagraph("Beta Testers","doup96, Graysonfary")
+Credits:AddParagraph("Discord server","discord.gg/spJewPjrUZ")
 
 
+
+local function loaded()
+	OrionLib:MakeNotification({
+        Name = "Successfully Loaded!",
+        Content = "Doup's CISH has successfully loaded into roblox! If you have any questions, Please feel free to ask in my discord server! (discord.gg/spJewPjrUZ)",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
+loaded()
 OrionLib:Init()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- ({local Section = Credits:AddSection({
+--	Name = "Developer"
+--})
+--Credits:AddLabel("Developed by doup96")
+--local Section = Credits:AddSection({
+--	Name = "Beta Tester"
+--})
+--Credits:AddLabel("Tested by Graysonfary and doup96")
+--local Section = Credits:AddSection({
+--	Name = "Discord Server"
+--})
+--Credits:AddLabel("Join our discord if you want to ask for suggestions to add or just wanna hang out! (discord.gg/spJewPjrUZ)")
+--})
