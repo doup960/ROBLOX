@@ -109,12 +109,33 @@ Other:AddButton({
   	end    
 })
 
+Other:AddButton({
+	Name = "Tires",
+	Callback = function()
+      		player.Character.HumanoidRootPart.CFrame = CFrame.new(-56, 3, 130)
+  	end    
+})
+
 local Section = Other:AddSection({
 	Name = "Work In Progress"
 })
 
 Other:AddButton({
+	Name = "Cash",
+	Callback = function()
+      	notifyWIP()
+  	end    
+})
+
+Other:AddButton({
 	Name = "Supersede",
+	Callback = function()
+      	notifyWIP()
+  	end    
+})
+
+Other:AddButton({
+	Name = "Circle Fighting",
 	Callback = function()
       	notifyWIP()
   	end    
