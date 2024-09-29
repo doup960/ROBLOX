@@ -88,25 +88,25 @@ Tab:AddToggle({
 })
 Tab:AddToggle({
 	Name = "Avoid any Monster (tested)",
-	Default = true,
+	Default = false,
 	Flag = "avoids",
 	Save = true
 })
 Tab:AddToggle({
 	Name = "No Eyefestation",
-	Default = true,
+	Default = false,
 	Flag = "noeyefestation",
 	Save = true
 })
 Tab:AddToggle({
 	Name = "No Searchlights",
-	Default = true,
+	Default = false,
 	Flag = "Searchlights",
 	Save = true
 })
 Tab:AddToggle({
 	Name = "No Steams",
-	Default = true,
+	Default = false,
 	Flag = "steaming",
 	Save = true
 })
