@@ -19,6 +19,10 @@ local circlespeed = 0.1
 local clickspeed = 0.5
 local spherespeed = 0.1
 local cashspeed = 0.2
+local circleminPosition = Vector3.new(-140, 3, -124)
+local circlemaxPosition = Vector3.new(-81, 3, -112)
+local fightingminPosition = Vector3.new(-140, 3, -124)
+local fightingmaxPosition = Vector3.new(-81, 3, -112)
 
 
 local CircleInc = Window:MakeTab({
@@ -39,12 +43,25 @@ CircleInc:AddToggle({
 	Callback = function(Value)
 		isToggled = Value
 		while isToggled do
-            wait(circlespeed)
+            wait(0.01)
             local stuff = game:GetService("Workspace").Stuff:GetChildren()
-            
+
+           
             if #stuff > 0 and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                local randomPart = stuff[math.random(1, #stuff)]
-                hrp.CFrame = randomPart.CFrame
+                local validParts = {}
+                for _, part in pairs(stuff) do
+                    local pos = part.Position
+                    if pos.X >= circleminPosition.X and pos.X <= circlemaxPosition.X and
+                       pos.Y >= circleminPosition.Y and pos.Y <= circlemaxPosition.Y and
+                       pos.Z >= circleminPosition.Z and pos.Z <= circlemaxPosition.Z then
+                        table.insert(validParts, part)
+                    end
+                end
+                
+                if #validParts > 0 then
+                    local randomPart = validParts[math.random(1, #validParts)]
+                    player.Character.HumanoidRootPart.CFrame = randomPart.CFrame
+                end
             end
         end
 	end    
@@ -261,7 +278,7 @@ Other:AddButton({
 Other:AddButton({
 	Name = "Lucktrize",
 	Callback = function()
-		hrp.CFrame = CFrame.new(-375, 3, 88)
+		hrp.CFrame = CFrame.new(-1923, 3, 162)
   	end    
 })
 Other:AddButton({
@@ -274,14 +291,8 @@ Other:AddButton({
 local Section = Other:AddSection({
 	Name = "Work In Progress"
 })
-Other:AddButton({
-	Name = "Lucktrize",
-	Callback = function()
-		--hrp.CFrame = CFrame.new(-375, 3, 88)
-        notifyWIP()
-  	end    
-})
--- Other:AddLabel("nothing coz im sigma like that 😎")
+
+Other:AddLabel("nothing coz im sigma like that 😎")
 
 local Credits = Window:MakeTab({
 	Name = "Credits",
@@ -289,7 +300,7 @@ local Credits = Window:MakeTab({
 	PremiumOnly = false
 })
 
-Credits:AddParagraph("Developers","doup96, Graysonfary")
+Credits:AddParagraph("Developers","doup96")
 Credits:AddParagraph("Beta Testers","doup96, Graysonfary")
 Credits:AddParagraph("Discord server","discord.gg/spJewPjrUZ")
 
@@ -305,51 +316,3 @@ local function loaded()
 end
 loaded()
 OrionLib:Init()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- ({local Section = Credits:AddSection({
---	Name = "Developer"
---})
---Credits:AddLabel("Developed by doup96")
---local Section = Credits:AddSection({
---	Name = "Beta Tester"
---})
---Credits:AddLabel("Tested by Graysonfary and doup96")
---local Section = Credits:AddSection({
---	Name = "Discord Server"
---})
---Credits:AddLabel("Join our discord if you want to ask for suggestions to add or just wanna hang out! (discord.gg/spJewPjrUZ)")
---})
