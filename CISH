@@ -43,7 +43,7 @@ CircleInc:AddToggle({
 	Callback = function(Value)
 		isToggled = Value
 		while isToggled do
-            wait(0.01)
+            wait(circlespeed)
             local stuff = game:GetService("Workspace").Stuff:GetChildren()
 
            
