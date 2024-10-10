@@ -15,22 +15,22 @@ local function notifyWIP()
 end
 
 
-local circlespeed = 0.1
+local circlespeed = 0.15
 local clickspeed = 0.5
-local spherespeed = 0.1
+local spherespeed = 0.15
 local cashspeed = 0.2
-local circleminPosition = Vector3.new(-140, 3, -124)
-local circlemaxPosition = Vector3.new(-81, 5, -112)
-local fightingminPosition = Vector3.new(-140, 3, -124)
-local fightingmaxPosition = Vector3.new(-81, 5, -112)
 
+local minX, minY, minZ = -23, 0, 6
+local maxX, maxY, maxZ = 23, 5, 52
+local minX2, minY2, minZ2 = -395, -5, -34
+local maxX2, maxY2, maxZ2 = -515, 3, 174
 
 local CircleInc = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-CircleInc:AddLabel("Beta Version V1.4.0")
+CircleInc:AddLabel("Beta Version V1.4.2")
 local Section = CircleInc:AddSection({
 	Name = "Automation"
 })
@@ -46,15 +46,17 @@ CircleInc:AddToggle({
             wait(circlespeed)
             local stuff = game:GetService("Workspace").Stuff:GetChildren()
 
-           
             if #stuff > 0 and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+
                 local validParts = {}
-                for _, part in pairs(stuff) do
-                    local pos = part.Position
-                    if pos.X >= circleminPosition.X and pos.X <= circlemaxPosition.X and
-                       pos.Y >= circleminPosition.Y and pos.Y <= circlemaxPosition.Y and
-                       pos.Z >= circleminPosition.Z and pos.Z <= circlemaxPosition.Z then
-                        table.insert(validParts, part)
+
+                for _, part in ipairs(stuff) do
+                        local partPos = part.Position
+                        
+                        if partPos.X >= minX and partPos.X <= maxX and
+                           partPos.Y >= minY and partPos.Y <= maxY and
+                           partPos.Z >= minZ and partPos.Z <= maxZ then
+                            table.insert(validParts, part)
                     end
                 end
                 
@@ -64,8 +66,9 @@ CircleInc:AddToggle({
                 end
             end
         end
-	end    
+	end 
 })
+
 
 
 local isToggled2 = false
@@ -119,11 +122,52 @@ CircleInc:AddToggle({
 })
 
 
-local Section = CircleInc:AddSection({
-	Name = "Speed"
+local isToggled5 = false
+local fightspeed = fightspeed or 0.15
+
+CircleInc:AddToggle({
+	Name = "Auto Fight",
+	Default = false,
+	Callback = function(Value)
+		isToggled5 = Value
+		while isToggled5 do
+            wait(fightspeed)
+            local stuff = game:GetService("Workspace").Stuff:GetChildren()
+
+            if #stuff > 0 and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local validParts = {}
+
+                for _, part in ipairs(stuff) do
+                    if part:IsA("BasePart") then
+                        local partPos = part.Position
+
+                        if partPos.X >= minX2 and partPos.X <= maxX2 and
+                           partPos.Y >= minY2 and partPos.Y <= maxY2 and
+                           partPos.Z >= minZ2 and partPos.Z <= maxZ2 then
+                            table.insert(validParts, part)
+                        end
+                    end
+                end
+
+                if #validParts > 0 then
+                    local randomPart = validParts[math.random(1, #validParts)]
+                    player.Character.HumanoidRootPart.CFrame = randomPart.CFrame
+                end
+            end
+
+            wait(0.1)
+        end
+	end 
 })
 
-local circleslider = CircleInc:AddSlider({
+
+local Speed2 = Window:MakeTab({
+	Name = "Speed",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local circleslider = Speed2:AddSlider({
 	Name = "Auto Circle Speed",
 	Min = 0.05,
 	Max = 1,
@@ -136,7 +180,7 @@ local circleslider = CircleInc:AddSlider({
 	end
 })
 
-local clickslider = CircleInc:AddSlider({
+local clickslider = Speed2:AddSlider({
 	Name = "Auto Click Speed",
 	Min = 0.1,
 	Max = 2.5,
@@ -149,7 +193,7 @@ local clickslider = CircleInc:AddSlider({
 	end    
 })
 
-local sphereslider = CircleInc:AddSlider({
+local sphereslider = Speed2:AddSlider({
 	Name = "Auto Sphere Speed",
 	Min = 0.05,
 	Max = 1,
@@ -162,7 +206,7 @@ local sphereslider = CircleInc:AddSlider({
 	end    
 })
 
-local cashslider = CircleInc:AddSlider({
+local cashslider = Speed2:AddSlider({
 	Name = "Auto Cash Speed",
 	Min = 0.1,
 	Max = 1.5,
@@ -175,31 +219,52 @@ local cashslider = CircleInc:AddSlider({
 	end
 })
 
-local Section = CircleInc:AddSection({
+local fightslider = Speed2:AddSlider({
+	Name = "Auto Fight Speed",
+	Min = 0.05,
+	Max = 1,
+	Default = 0.15,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 0.01,
+	ValueName = "Seconds",
+	Callback = function(Value)
+		clickspeed = Value
+	end    
+})
+
+local Section = Speed2:AddSection({
 	Name = "Reset Speed"
 })
-CircleInc:AddButton({
+
+
+Speed2:AddButton({
 	Name = "Reset Circle Speed",
 	Callback = function()
         circleslider:Set(0.15)
   	end    
 })
-CircleInc:AddButton({
+Speed2:AddButton({
 	Name = "Reset Click Speed",
 	Callback = function()
         clickslider:Set(0.5)
   	end    
 })
-CircleInc:AddButton({
+Speed2:AddButton({
 	Name = "Reset Sphere Speed",
 	Callback = function()
         sphereslider:Set(0.15)
   	end    
 })
-CircleInc:AddButton({
+Speed2:AddButton({
 	Name = "Reset Cash Speed",
 	Callback = function()
         cashslider:Set(0.2)
+  	end    
+})
+Speed2:AddButton({
+	Name = "Reset Fight Speed",
+	Callback = function()
+        fightslider:Set(0.15)
   	end    
 })
 
