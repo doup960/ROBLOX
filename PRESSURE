@@ -76,7 +76,7 @@ Tab:AddButton({
 })
 Tab:AddToggle({
 	Name = "no proxmitiyprompt duration",
-	Default = true,
+	Default = false,
 	Flag = "asdas",
 	Save = true
 })
