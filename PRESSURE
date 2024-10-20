@@ -159,8 +159,8 @@ local credits = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
-credits:AddParagraph("Credits to playvora", "https://scriptblox.com/script/Pressure-script-15848")
-credits:AddParagraph("https://www.roblox.com/users/2207117597/profile")
+credits:AddParagraph("Developers", "doup96")
+credits:AddParagraph("Script Testers", "doup96, Graysonfary")
 local others = Window:MakeTab({
 	Name = "other stuff",
 	Icon = "rbxassetid://4483345998",
@@ -280,7 +280,7 @@ workspace.ChildAdded:Connect(function(inst)
 				Name = "A monster has spawned go hide in the closet",
 				Content = "WARNING!!!!!!!!!!!!",
 				Image = "rbxassetid://4483345998",
-				Time = 10
+				Time = 6
 			})
 		end
 		if OrionLib.Flags.monsters.Value then
