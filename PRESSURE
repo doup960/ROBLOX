@@ -215,40 +215,46 @@ local function applymos(inst)
 	table.insert(monster, text)
 end
 local function applylocker(inst)
-	local text = Instance.new("BillboardGui")
-	text.Name = "locker"
-	text.Adornee = inst
-	text.Size = UDim2.new(0, 200, 0, 50)
-	text.StudsOffset = Vector3.new(0, 2, 0)
-	text.AlwaysOnTop = true
-	text.Parent = game.CoreGui
-	local label = Instance.new("TextLabel")
-	label.Size = UDim2.new(1, 0, 1, 0)
-	label.Text = "Monster Locker"
-	label.TextColor3 = Color3.new(0.5, 0, 0.5) 
-	label.BackgroundTransparency = 1
-	label.TextStrokeTransparency = 0
-	label.TextScaled = true
-	label.Parent = text
-	table.insert(locker, text)
+	local billboardGui = Instance.new("BillboardGui")
+	billboardGui.Parent = inst
+	billboardGui.Adornee = inst
+	billboardGui.Size = UDim2.new(4, 0, 1.6, 0)
+	billboardGui.StudsOffset = Vector3.new(0, 4.5, 0)
+	billboardGui.AlwaysOnTop = true
+	local textLabel = Instance.new("TextLabel")
+	textLabel.Parent = billboardGui
+	textLabel.Size = UDim2.new(1, 0, 1, 0)
+	textLabel.Text = "bad door!"
+	textLabel.TextScaled = true
+	textLabel.Font = Enum.Font.FredokaOne
+	textLabel.TextColor3 = Color3.new(255, 40, 40)
+	textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel.BorderSizePixel = 0
+	textLabel.BackgroundTransparency = 1
+	textLabel.TextStrokeTransparency = 0
+	textLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	table.insert(locker, billboardGui)
 end
 local function applytrickster(inst)
-	local text = Instance.new("BillboardGui")
-	text.Name = "locker"
-	text.Adornee = inst
-	text.Size = UDim2.new(0, 200, 0, 50)
-	text.StudsOffset = Vector3.new(0, 2, 0)
-	text.AlwaysOnTop = true
-	text.Parent = game.CoreGui
-	local label = Instance.new("TextLabel")
-	label.Size = UDim2.new(1, 0, 1, 0)
-	label.Text = "Do not enter"
-	label.TextColor3 = Color3.new(1, 1, 1) 
-	label.BackgroundTransparency = 1
-	label.TextStrokeTransparency = 0
-	label.TextScaled = true
-	label.Parent = text
-	table.insert(trickster, text)
+	local billboardGui = Instance.new("BillboardGui")
+	billboardGui.Parent = inst
+	billboardGui.Adornee = inst
+	billboardGui.Size = UDim2.new(4, 0, 1.6, 0)
+	billboardGui.StudsOffset = Vector3.new(0, 4.5, 0)
+	billboardGui.AlwaysOnTop = true
+	local textLabel = Instance.new("TextLabel")
+	textLabel.Parent = billboardGui
+	textLabel.Size = UDim2.new(1, 0, 1, 0)
+	textLabel.Text = "Monster Locker"
+	textLabel.TextScaled = true
+	textLabel.Font = Enum.Font.FredokaOne
+	textLabel.TextColor3 = Color3.new(0.3, 0, 0.7)
+	textLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	textLabel.BorderSizePixel = 0
+	textLabel.BackgroundTransparency = 1
+	textLabel.TextStrokeTransparency = 0
+	textLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	table.insert(trickster, billboardGui)
 end
 local keycor = coroutine.create(function()
 	workspace.Rooms.DescendantAdded:Connect(function(inst)
